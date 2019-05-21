@@ -1,15 +1,16 @@
 
 print("Hello World")
 
+#GLOBAL VARIABLES
+#For safety, let's assign values originally,
+#to lock each variable into the type we want.
+#Will need to implement error handling later.
+drug_name = "empty"
+num_pills = 0
+pills_per_dose = 0
+
 # FUNCTIONS
 def new_entry():
-    #For safety, let's assign values originally,
-    #to lock each variable into the type we want.
-    #Will need to implement error handling later.
-    drug_name = "empty"
-    num_pills = 0
-    pills_per_dose = 0
-    
     drug_name = input("Drug name:")
     num_pills = input("Total number of pills:")
     pills_per_dose = input("Number of pills taken per dose:")
@@ -28,7 +29,6 @@ if go_to == "n":
     new_entry()
 elif go_to == "d":
     print("d pressed")
-# display_prev_entry()
+    display_prev_entry()
 else:
     print("Invalid entry.")
-
