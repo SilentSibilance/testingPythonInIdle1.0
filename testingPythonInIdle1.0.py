@@ -26,7 +26,7 @@ def display_prev_entry():
 
 
 def main_menu():
-    print("Press 'd' if you would like to display the previous entry.")
+    print("\nPress 'd' if you would like to display the previous entry.")
     go_to = input("Press 'n' if you would like to submit a new entry.")
     if go_to == "n":
         print("n pressed")
