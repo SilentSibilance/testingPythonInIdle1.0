@@ -1,3 +1,6 @@
+import sqlite3
+from sqlite3 import Error
+
 
 print("Hello World")
 print("Celebrate! You are demonstrating your knowledge! And writing code!")
@@ -19,6 +22,19 @@ class Prescription:
         self.c_num_pills = c_num_pills
         self.c_pills_per_dose = c_pills_per_dose
 
+# DATABASE
+def create_connection(db_file):
+    # Create a database connection to an SQLite database.
+    try:
+        conn = sqlite3.connect(db_file)
+        print(sqlite3.version)
+        print("Connection created.")
+    except Error as e:
+        print(e)
+    finally:
+        conn.close()
+
+
 # FUNCTIONS
 def new_entry():
     drug_name = input("Drug name:")
@@ -35,13 +51,13 @@ def display_prev_entry():
 
 
 def test_prescription():
-    #TODO - get 3 user inputs
+    # get 3 user inputs
     l_drug_name = input("Drug name:")
     l_num_pills = input("Total number of pills:")
     l_pills_per_dose = input("Number of pills taken per dose:")
 
     my_prescription = Prescription(l_drug_name, l_num_pills, l_pills_per_dose)
-    #TODO - print values from object
+    # print values from object
     print("\nThis is what we have on file for you:")
     print("Drug name: " + my_prescription.c_drug_name)
     print("Number of total pills: " + my_prescription.c_num_pills)
@@ -67,5 +83,9 @@ def main_menu():
         main_menu()
 
 
+# SETUP DATABASE CONNECTION
+create_connection("/Users/taffybear/Coding Folders/testingPythonInIdle1.0/prescript.db")
+
 # HANDLE USER ACTION
 main_menu()
+
