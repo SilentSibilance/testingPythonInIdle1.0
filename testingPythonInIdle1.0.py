@@ -1,5 +1,6 @@
 
 print("Hello World")
+print("Celebrate! You are demonstrating your knowledge! And writing code!")
 
 #GLOBAL VARIABLES
 #For safety, let's assign values originally,
