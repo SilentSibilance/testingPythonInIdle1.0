@@ -22,6 +22,8 @@ class Prescription:
         self.c_num_pills = c_num_pills
         self.c_pills_per_dose = c_pills_per_dose
 
+
+
 # DATABASE
 def create_connection(db_file):
     # Create a database connection to an SQLite database.
@@ -29,10 +31,21 @@ def create_connection(db_file):
         conn = sqlite3.connect(db_file)
         print(sqlite3.version)
         print("Connection created.")
+        return conn
     except Error as e:
         print(e)
-    finally:
-        conn.close()
+    # Taking out. Must close database at some point. 
+    # finally:
+        # conn.close()
+
+
+def create_table(conn, create_table_sql):
+    try:
+        c = conn.cursor()
+        c.execute(create_table_sql)
+    except Error as e:
+        print(e)
+
 
 
 # FUNCTIONS
@@ -84,7 +97,24 @@ def main_menu():
 
 
 # SETUP DATABASE CONNECTION
-create_connection("/Users/taffybear/Coding Folders/testingPythonInIdle1.0/prescript.db")
+database = "/Users/taffybear/Coding Folders/testingPythonInIdle1.0/prescript.db"
+
+sql_create_prescriptions_table = """ CREATE TABLE IF NOT EXISTS prescriptions (
+                                        id integer PRIMARY KEY,
+                                        name text NOT NULL,
+                                        total_pills integer NOT NULL,
+                                        pills_per_dose integer NOT NULL
+                                        ); """                                        
+
+#  Create a database connection.
+conn = create_connection(database)
+if conn is not None:
+    create_table(conn, sql_create_prescriptions_table)
+    print("Created prescription table.")
+elif conn is None:
+    print("Conn is None.")
+else:
+    print("Error! Cannot create the database connection.")
 
 # HANDLE USER ACTION
 main_menu()
