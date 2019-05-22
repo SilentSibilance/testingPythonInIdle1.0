@@ -65,7 +65,7 @@ def new_entry():
     pills_per_dose = input("Number of pills taken per dose:")
 
     with conn:
-        l_prescription = (drug_name, 47, 3)
+        l_prescription = (drug_name, total_pills, pills_per_dose)
         prescription_id = create_prescription(conn, l_prescription)
         print("New prescription has been added to the database by user.")
     main_menu()
@@ -131,9 +131,6 @@ elif conn is None:
 else:
     print("Error! Cannot create the database connection.")
 
-with conn:
-     l_prescription = ('Motrin', 47, 3)
-     prescription_id = create_prescription(conn, l_prescription)
 
 # HANDLE USER ACTION
 main_menu()
