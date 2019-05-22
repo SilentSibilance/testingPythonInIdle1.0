@@ -46,6 +46,16 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
 
+def create_prescription(conn, prescription):
+    # Create and insert a new prescription into the prescriptions table in the database. 
+    sql = '''INSERT INTO prescriptions(name,total_pills,pills_per_dose)
+            VALUES(?,?,?) '''
+    c = conn.cursor()
+    c.execute(sql, prescription)
+    print("Prescription has been added.")
+    return c.lastrowid
+
+
 
 
 # FUNCTIONS
@@ -114,7 +124,11 @@ if conn is not None:
 elif conn is None:
     print("Conn is None.")
 else:
-    print("Error! Cannot create the database connection.")
+    print("Error! Cannot create the database connection.")s
+
+with conn:
+     l_prescription = ('Motrin', 47, 3)
+     prescription_id = create_prescription(conn, l_prescription)
 
 # HANDLE USER ACTION
 main_menu()
