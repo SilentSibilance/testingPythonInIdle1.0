@@ -63,6 +63,11 @@ def new_entry():
     drug_name = input("Drug name:")
     total_pills = input("Total number of pills:")
     pills_per_dose = input("Number of pills taken per dose:")
+
+    with conn:
+        l_prescription = (drug_name, 47, 3)
+        prescription_id = create_prescription(conn, l_prescription)
+        print("New prescription has been added to the database by user.")
     main_menu()
 
 
