@@ -78,6 +78,19 @@ def display_prev_entry():
     main_menu()
 
 
+def display_all(conn):
+    #TODO
+    c = conn.cursor()
+    c.execute("SELECT * FROM prescriptions")
+ 
+    rows = c.fetchall()
+ 
+    for row in rows:
+        print(row)
+    
+    main_menu()
+
+
 def test_prescription():
     # get 3 user inputs
     l_drug_name = input("Drug name:")
@@ -95,11 +108,15 @@ def test_prescription():
 
 def main_menu():
     print("\nPress 'd' if you would like to display the previous entry.")
+    print("Press 'a' if you would like to display all prescriptions on file.")
     print("Press 'c' if you would like to run a test function of Prescription object.")
     go_to = input("Press 'n' if you would like to submit a new entry.")
     if go_to == "n":
         print("n pressed")
         new_entry()
+    elif go_to == "a":
+        print("a pressed")
+        display_all(conn)
     elif go_to == "d":
         print("d pressed")
         display_prev_entry()
